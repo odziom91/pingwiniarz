@@ -1,5 +1,44 @@
-# pingwiniarz
+# Pingwiniarz
 Bot Discord dla społeczności "Polska Społeczność Linuxa"
+
+## O "Pingwiniarzu"
+Głównym zadaniem "Pingwiniarza" jest informowanie użytkowników Discorda o nowych wersjach dystrybucji Linuksa oraz oprogramowaniu dla graczy.
+
+Dodatkowo dzięki zaimplementowanym funkcjom możliwe jest sprawdzenie tych informacji w dowolnym momencie. Jako smaczek pojawiły się tu również parsery dla zdjęć z kilku portali.
+
+Bot cały czas jest w rozbudowie.
+
+## Systemy operacyjne, które obsługuje bot
+- Ubuntu
+- Pop!_OS
+- Elementary OS
+- Linux Mint
+- Zorin OS
+- Solus
+- Garuda Linux
+- EndeavourOS
+- Manjaro Linux
+- MX Linux
+- Fedora
+- OpenSuse
+- Arch Linux
+- Gentoo Linux
+- Slackware
+- Linux From Scratch
+- Qubes OS
+- NixOS
+
+Lista systemów operacyjnych może ulec zmianie.
+
+## Oprogramowanie dla graczy, które obsługuje bot
+- Lutris
+- Wine
+- Proton
+- Proton-GE
+- Wine-GE
+- Wine Kron4ek
+
+W przyszłości dodanie zostanie wsparcie dla Luxtorpeda i innego softu.
 
 ## Wymagane moduły
 - Discord
