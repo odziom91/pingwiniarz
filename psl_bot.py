@@ -2,6 +2,7 @@ import configparser
 import discord
 import time
 from random import randint
+from modules.psl_GetVideo import *
 from modules.psl_GetVersion import *
 from modules.psl_Fun import *
 from discord.ext import commands, tasks
@@ -32,6 +33,7 @@ async def on_ready():
     chg_presence.start()
     gaming_version_checker.start()
     os_version_checker.start()
+    nvidia_version_checker.start()
 
 @client.event
 async def on_command_error(ctx, error):
@@ -54,6 +56,7 @@ async def pomoc(ctx):
         f'**;linver** - informacja o aktualnie dostępnych wersjach wybranych dystrybucji Linuksa\n'
         f'**;gaming** - informacja o aktualnie dostępnych wersjach oprogramowania dla graczy - Lutris, Wine, Proton, etc.\n'
         f'**;pobierz** - lista hiperłączy dla wybranych dystrybucji do pobrania\n'
+        f'**;nvidia** - informacja o sterownikach wideo kart graficznych NVidia'
         f'\n'
         f'Pozostałe:\n'
         f'**;cat** - losuj słodkiego kota\n'
@@ -68,6 +71,21 @@ async def pomoc(ctx):
         f'Więcej komend wkrótce...\n'
         f'W przypadku problemów z działaniem bota prosimy o kontakt z Administracją.\n'
     )
+
+@client.command()
+async def nvidia(ctx):
+    channel = client.get_channel(cfg_channel)
+    config = configparser.ConfigParser()
+    config.read('./psl_version_checker.ini')
+    cfg_nv_nfb = config.get("video", "nvidia_nfb")
+    cfg_nv_pb = config.get("video", "nvidia_pb")
+    await channel.send(
+                f'***Oto najnowsze wersje sterowników wideo dla kart graficznych NVidia***\n'
+                f'NVidia - New Feature Branch: **{cfg_nv_nfb}**\n'
+                f'NVidia - Production Branch: **{cfg_nv_pb}**\n'
+                f'\n'
+                f'Jeśli to możliwe zalecamy instalację sterownika z linii New Feature Branch.\n'
+            )
 
 @client.command()
 async def gaming(ctx):
@@ -368,6 +386,29 @@ async def gaming_version_checker():
         config.set("gaming", "lutris", chk_lutris)
     with open('./psl_version_checker.ini', 'w') as configfile:
         config.write(configfile)
+
+@tasks.loop(hours=1)
+async def nvidia_version_checker():
+    channel = client.get_channel(cfg_channel)
+    config = configparser.ConfigParser()
+    config.read('./psl_version_checker.ini')
+    cfg_nv_nfb = config.get("video", "nvidia_nfb")
+    cfg_nv_pb = config.get("video", "nvidia_pb")
+    chk_nv_nfb_name, chk_nv_nfb_version, chk_nv_nfb_date = GetNvidia_nfb()
+    chk_nv_pb_name, chk_nv_pb_version, chk_nv_pb_date = GetNvidia_pb()
+    if chk_nv_nfb_version != cfg_nv_nfb:
+            await channel.send(
+                f'Hej, użytkownicy kart graficznych NVidia!\nZostała wydana nowa wersja sterownika "New Features Branch".\nNazwa sterownika: {chk_nv_nfb_name}\nWersja: **{chk_nv_nfb_version}**\nData wydania: **{chk_nv_nfb_date}**\n'
+            )
+            config.set("video", "nvidia_nfb", chk_nv_nfb_version)
+    if chk_nv_pb_version != cfg_nv_pb:
+            await channel.send(
+                f'Hej, użytkownicy kart graficznych NVidia!\nZostała wydana nowa wersja sterownika "Production Branch".\nNazwa sterownika: {chk_nv_pb_name}\nWersja: **{chk_nv_pb_version}**\nData wydania: **{chk_nv_pb_date}**\n'
+            )
+            config.set("video", "nvidia_pb", chk_nv_pb_version)
+    with open('./psl_version_checker.ini', 'w') as configfile:
+        config.write(configfile)
+
 
 ## init
 if __name__ == '__main__':
