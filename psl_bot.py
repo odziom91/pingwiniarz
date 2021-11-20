@@ -59,8 +59,8 @@ async def pomoc(ctx):
         f'**;nvidia** - informacja o sterownikach wideo kart graficznych NVidia'
         f'\n'
         f'Pozostałe:\n'
-        f'**;cat** - losuj słodkiego kota\n'
-        f'**;dog** - losuj słodkiego psa\n'
+        f'**;cat** - losuj randomowego kota\n'
+        f'**;dog** - losuj randomowego psa\n'
         f'**;linuxmeme** - losuj mema o Linuksie\n'
         f'**;windowsmeme** - losuj mema o Windowsie\n'
         f'**;plmeme** - losuj polskiego mema\n'
@@ -128,6 +128,7 @@ async def linver(ctx):
         ("mx", 0, "MX Linux"),
         ("manjaro", 1, "Manjaro Linux"),
         ("garuda", 0, "Garuda Linux")
+        ("artix", 0, "Artix"
     ]
     os_list_advanced = [
         ("arch", 0, "Arch Linux"),
@@ -180,6 +181,7 @@ async def pobierz(ctx):
         f'**EndeavourOS** - pobierz: https://endeavouros.com/latest-release/ \n'
         f'**MX Linux** - pobierz: https://mxlinux.org/download-links/#Mirrors \n'
         f'**Garuda Linux** - pobierz: https://garudalinux.org/downloads.html \n'
+        f'**Artix** - pobierz: https://artixlinux.org/ \n'
     )
     time.sleep(3)
     await ctx.channel.send(
