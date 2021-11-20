@@ -10,7 +10,6 @@ Bot cały czas jest w rozbudowie.
 
 ## Systemy operacyjne, które obsługuje bot
 - Ubuntu
-- Pop!_OS
 - Elementary OS
 - Linux Mint
 - Zorin OS
