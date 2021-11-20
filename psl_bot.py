@@ -170,7 +170,6 @@ async def pobierz(ctx):
         f'**Elementary OS** - pobierz: https://elementary.io/ \n'
         f'**Zorin OS** - pobierz: https://zorinos.com/download \n'
         f'**Solus** - pobierz: https://getsol.us/download/ \n'
-        f'**Pop!_OS** - pobierz: https://pop.system76.com/ \n'
     )
     time.sleep(3)
     await ctx.channel.send(
@@ -301,7 +300,6 @@ async def os_version_checker():
     config.read('./psl_version_checker.ini')
     os_list = [
         ("ubuntu", 1, "Ubuntu"),
-        ("popos", 0, "Pop!_OS"),
         ("elementary", 0, "Elementary OS"),
         ("mint", 0, "Linux Mint"),
         ("zorin", 0, "Zorin OS"),
