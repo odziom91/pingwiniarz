@@ -21,6 +21,7 @@ Bot cały czas jest w rozbudowie.
 - Fedora
 - OpenSuse
 - Arch Linux
+- Artix
 - Gentoo Linux
 - Slackware
 - Linux From Scratch
