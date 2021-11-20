@@ -48,7 +48,9 @@ W przyszłości dodanie zostanie wsparcie dla Luxtorpeda i innego softu.
 1. Sklonuj repozytorium.
 2. Utwórz plik psl_config.ini - skorzystaj z pliku example_psl_config.ini
 3. Uzupełnij wszystkie dane - wraz z tokenem wygenerowanym w środowisku deweloperskim Discord.
-4. Uruchom przez komendę python3 ./psl_bot.py
+4. Uruchom w tle przez komendę ```nohup python3 ./psl_bot.py &```
+   
+   Możesz również wykorzystać komendę ```screen```.
 
 ## psl_config.ini - dokumentacja
 Poniżej opisane są poszczególne opcje:
