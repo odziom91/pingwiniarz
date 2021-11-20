@@ -85,12 +85,12 @@ Komendy dotyczące Linuksa:
 
 ```
 Pozostałe:
-;cat - losuj słodkiego kota
-;dog - losuj słodkiego psa
+;cat - losuj randomowego kota
+;dog - losuj randomowego psa
 ;linuxmeme - losuj mema o Linuksie
 ;windowsmeme - losuj mema o Windowsie
 ;plmeme - losuj polskiego mema
-;meme - losuj zagranicznego mema
-;unixporn - losuj desktop
-;wallpaper - inspiracja na tapetę
+;meme - losuj ogólnego mema
+;unixporn - losuj desktop Uniksowy
+;wallpaper - losuj tapetę
 ```
