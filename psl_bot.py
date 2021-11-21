@@ -19,7 +19,7 @@ admins = config.get("config","admins").split(",")
 mods = config.get("config","mods").split(",")
 supporters = config.get("config","supporters").split(",")
 token = config.get("config","token")
-embed_color = 0x2596be
+embed_color = 0xeace37
 #####
 
 ##### discord part
@@ -39,10 +39,15 @@ async def on_ready():
 @client.event
 async def on_command_error(ctx, error):
     channel = client.get_channel(cfg_channel)
-    await channel.send(
-        f'Nieprawidłowa komenda. Lista komend dostępna jest po wpisaniu `;pomoc`.'
+    embed_title = f'Błąd'
+    field1_name = f'Wystąpił błąd podczas wykonywania komendy.'
+    field1_value = (
+        f'Jeśli problem będzie się powtarzał prosimy o kontakt z Administracją.'
     )
-
+    embedVar = discord.Embed(title=embed_title, color=0x00ff00)
+    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
+    await channel.send(embed=embedVar)
+    
 ## commands
 @client.command()
 async def pomoc(ctx):
@@ -68,6 +73,7 @@ async def pomoc(ctx):
         f'**;windowsmeme** - losuj mema o Windowsie\n'
         f'**;plmeme** - losuj polskiego mema\n'
         f'**;meme** - losuj zagranicznego mema\n'
+        f'**;papameme** - "po maturze chodziliśmy na kremówki" ;)'
         f'**;unixporn** - losuj desktop\n'
         f'**;wallpaper** - inspiracja na tapetę\n'
     )
@@ -338,7 +344,8 @@ async def papameme(ctx):
         f'{meme}'
     )
     embedVar = discord.Embed(title=embed_title, color=embed_color)
-    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
+    #embedVar.add_field(name=field1_name, value=field1_value, inline=False)
+    embedVar.set_image(url=meme)
     await channel.send(embed=embedVar)
 
 @client.command()
