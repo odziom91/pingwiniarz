@@ -288,6 +288,15 @@ async def wallpaper(ctx):
         f'{wp}'
     )
 
+@client.command()
+async def test():
+    channel = client.get_channel(cfg_channel)
+    embedVar = discord.Embed(title="Test", description="Testowy opis", color=0x00ff00)
+    embedVar.add_field(name="Pole #1", value="Wartość pola #1", inline=False)
+    embedVar.add_field(name="Pole #2", value="ęśąćż", inline=False)
+    await channel.send(embed=embedVar)
+
+
 ## tasks
 @tasks.loop(seconds=25.0)
 async def chg_presence():
