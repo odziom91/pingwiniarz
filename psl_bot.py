@@ -46,20 +46,21 @@ async def on_command_error(ctx, error):
 @client.command()
 async def pomoc(ctx):
     channel = client.get_channel(cfg_channel)
-    await channel.send(
-        f'***Pomoc dla {bot_name}***\n'
-        f'\n'
-        f'Komendy dotyczące serwera:\n'
+    embed_title = f'***Pomoc dla {bot_name}***'
+    field1_name = f'Komendy dotyczące serwera:'
+    field1_value = (
         f'**;admin** - aktualny zespół administracji i moderatorów\n'
         f'**;support** - lista wspierających serwer'
-        f'\n'
-        f'Komendy dotyczące Linuksa:\n'
+    )
+    field2_name = f'Komendy dotyczące Linuksa:'
+    field2_value = (
         f'**;linver** - informacja o aktualnie dostępnych wersjach wybranych dystrybucji Linuksa\n'
         f'**;gaming** - informacja o aktualnie dostępnych wersjach oprogramowania dla graczy - Lutris, Wine, Proton, etc.\n'
         f'**;pobierz** - lista hiperłączy dla wybranych dystrybucji do pobrania\n'
         f'**;nvidia** - informacja o sterownikach wideo kart graficznych NVidia'
-        f'\n'
-        f'Pozostałe:\n'
+    )
+    field3_name = f'Pozostałe:'
+    field3_value = (
         f'**;cat** - losuj słodkiego kota\n'
         f'**;dog** - losuj słodkiego psa\n'
         f'**;linuxmeme** - losuj mema o Linuksie\n'
@@ -68,10 +69,43 @@ async def pomoc(ctx):
         f'**;meme** - losuj zagranicznego mema\n'
         f'**;unixporn** - losuj desktop\n'
         f'**;wallpaper** - inspiracja na tapetę\n'
-        f'\n'
+    )
+    field4_value = (
         f'Więcej komend wkrótce...\n'
         f'W przypadku problemów z działaniem bota prosimy o kontakt z Administracją.\n'
     )
+    embedVar = discord.Embed(title=embed_title, color=0x00ff00)
+    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
+    embedVar.add_field(name=field2_name, value=field2_value, inline=False)
+    embedVar.add_field(name=field3_name, value=field3_value, inline=False)
+    embedVar.add_field(value=field4_value, inline=False)
+    await channel.send(embed=embedVar)
+    # await channel.send(
+    #     f'***Pomoc dla {bot_name}***\n'
+    #     f'\n'
+    #     f'Komendy dotyczące serwera:\n'
+    #     f'**;admin** - aktualny zespół administracji i moderatorów\n'
+    #     f'**;support** - lista wspierających serwer'
+    #     f'\n'
+    #     f'Komendy dotyczące Linuksa:\n'
+    #     f'**;linver** - informacja o aktualnie dostępnych wersjach wybranych dystrybucji Linuksa\n'
+    #     f'**;gaming** - informacja o aktualnie dostępnych wersjach oprogramowania dla graczy - Lutris, Wine, Proton, etc.\n'
+    #     f'**;pobierz** - lista hiperłączy dla wybranych dystrybucji do pobrania\n'
+    #     f'**;nvidia** - informacja o sterownikach wideo kart graficznych NVidia'
+    #     f'\n'
+    #     f'Pozostałe:\n'
+    #     f'**;cat** - losuj słodkiego kota\n'
+    #     f'**;dog** - losuj słodkiego psa\n'
+    #     f'**;linuxmeme** - losuj mema o Linuksie\n'
+    #     f'**;windowsmeme** - losuj mema o Windowsie\n'
+    #     f'**;plmeme** - losuj polskiego mema\n'
+    #     f'**;meme** - losuj zagranicznego mema\n'
+    #     f'**;unixporn** - losuj desktop\n'
+    #     f'**;wallpaper** - inspiracja na tapetę\n'
+    #     f'\n'
+    #     f'Więcej komend wkrótce...\n'
+    #     f'W przypadku problemów z działaniem bota prosimy o kontakt z Administracją.\n'
+    # )
 
 @client.command()
 async def nvidia(ctx):
