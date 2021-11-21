@@ -323,7 +323,7 @@ async def cat(ctx):
     cat = GetCat()
     embed_title = f'**Wylosowano kociaka**'
     embedVar = discord.Embed(title=embed_title, color=embed_color)
-    embedVar.set_image(url=dog)
+    embedVar.set_image(url=cat)
     await channel.send(embed=embedVar)
 
 @client.command()
