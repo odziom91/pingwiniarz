@@ -45,7 +45,8 @@ async def on_command_error(ctx, error):
 ## commands
 @client.command()
 async def pomoc(ctx):
-    await ctx.channel.send(
+    channel = client.get_channel(cfg_channel)
+    await channel.send(
         f'***Pomoc dla {bot_name}***\n'
         f'\n'
         f'Komendy dotyczące serwera:\n'
@@ -89,7 +90,8 @@ async def nvidia(ctx):
 
 @client.command()
 async def gaming(ctx):
-    await ctx.channel.send(
+    channel = client.get_channel(cfg_channel)
+    await channel.send(
         f'Proszę poczekać - pobieram aktualne dane...\n\n'
     )
     wine_versions = GetVersion_Wine()
@@ -98,7 +100,7 @@ async def gaming(ctx):
     proton_ge_version = GetVersion_Proton_GE()
     wine_ge_version = GetVersion_Wine_GE()
     wine_kronfourek_version = GetVersion_Wine_Kronfourek()
-    await ctx.channel.send(
+    await channel.send(
         f'***Aktualne wersje oprogramowania dla graczy***\n'
         f'**Lutris**\nStable: {lutris_version}\n'
         f'***Oficjalne wersje Wine/Proton***\n'
@@ -112,6 +114,7 @@ async def gaming(ctx):
 
 @client.command()
 async def linver(ctx):
+    channel = client.get_channel(cfg_channel)
     distrowatch = []
     os_list_beginners = [
         ("ubuntu", 1, "Ubuntu"),
@@ -154,16 +157,17 @@ async def linver(ctx):
         chk_os = GetVersion_Distrowatch_OS(os_1, os_2)
         distrowatch.append(f'{os_3}: **{chk_os}**')
     str1 = '\n'.join(distrowatch)
-    await ctx.channel.send(
+    await channel.send(
         f'{str1}'
     )
 
 @client.command()
 async def pobierz(ctx):
-    await ctx.channel.send(
+    channel = client.get_channel(cfg_channel)
+    await channel.send(
         f'***Hiperłącza do pobrania najpopularniejszych dystrybucji Linux***'
     )
-    await ctx.channel.send(
+    await channel.send(
         f'**Dla początkujących użytkowników:**\n'
         f'**Ubuntu** - pobierz: https://www.ubuntu.com/download/ \n'
         f'**Linux Mint** - pobierz: https://www.linuxmint.com/download.php \n'
@@ -173,7 +177,7 @@ async def pobierz(ctx):
         f'**Pop!_OS** - pobierz: https://pop.system76.com/ \n'
     )
     time.sleep(3)
-    await ctx.channel.send(
+    await channel.send(
         f'**Dla średnio-zaawansowanych użytkowników:**\n'
         f'**Fedora** - pobierz: https://getfedora.org/pl/ \n'
         f'**openSUSE** - pobierz: https://get.opensuse.org/pl/ \n'
@@ -183,7 +187,7 @@ async def pobierz(ctx):
         f'**Garuda Linux** - pobierz: https://garudalinux.org/downloads.html \n'
     )
     time.sleep(3)
-    await ctx.channel.send(
+    await channel.send(
         f'**Dla zaawansowanych użytkowników:**\n'
         f'**Arch Linux** - pobierz: https://archlinux.org/download/ \n'
         f'**Gentoo Linux** - pobierz: http://www.gentoo.org/main/en/mirrors.xml \n'
@@ -196,10 +200,11 @@ async def pobierz(ctx):
 
 @client.command()
 async def admin(ctx):
+    channel = client.get_channel(cfg_channel)
     str1 = '\n'.join(head_admins)
     str2 = '\n'.join(admins)
     str3 = '\n'.join(mods)
-    await ctx.channel.send(
+    await channel.send(
         f'***Administracja serwera {server_name}***\n'
         f'**Główni administratorzy:**\n'
         f'{str1}'
@@ -211,8 +216,9 @@ async def admin(ctx):
 
 @client.command()
 async def support(ctx):
+    channel = client.get_channel(cfg_channel)
     str1 = '\n'.join(supporters)
-    await ctx.channel.send(
+    await channel.send(
         f'***Oto lista wspierających serwer {server_name}***\n'
         f'{str1}\n\n'
         f'Jeśli chcesz znaleźć się na tej liście koniecznie zajrzyj na kanał #wesprzyj_nas \n'
@@ -285,7 +291,6 @@ async def wallpaper(ctx):
 ## tasks
 @tasks.loop(seconds=25.0)
 async def chg_presence():
-    discord
     komunikaty = [
         ";pomoc | napisz do mnie ;)",
         ";pomoc | pomoc",
