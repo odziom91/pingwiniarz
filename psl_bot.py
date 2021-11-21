@@ -289,7 +289,7 @@ async def wallpaper(ctx):
     )
 
 @client.command()
-async def test():
+async def test(ctx):
     channel = client.get_channel(cfg_channel)
     embedVar = discord.Embed(title="Test", description="Testowy opis", color=0x00ff00)
     embedVar.add_field(name="Pole #1", value="Wartość pola #1", inline=False)
