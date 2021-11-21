@@ -130,7 +130,7 @@ async def gaming(ctx):
     wine_ge_version = GetVersion_Wine_GE()
     wine_kronfourek_version = GetVersion_Wine_Kronfourek()
 
-    embed_title = f'***Aktualne wersje oprogramowania dla graczy***'
+    embed_title = f'**Aktualne wersje oprogramowania dla graczy**'
     field1_name = f'**Lutris**'
     field1_value = (
         f'Wersja: **{lutris_version}**'
@@ -142,19 +142,19 @@ async def gaming(ctx):
     )
     field3_name = f'Proton'
     field3_value = (
-        f'Wersja: {proton_version}'
+        f'Wersja: **{proton_version}**'
     )
     field4_name = f'Proton-GE'
     field4_value = (
-        f'Wersja: {proton_ge_version}'
+        f'Wersja: **{proton_ge_version}**'
     )
     field5_name = f'Wine-GE'
     field5_value = (
-        f'Wersja: {wine_ge_version}'
+        f'Wersja: **{wine_ge_version}**'
     )
     field6_name = f'Kron4ek Wine'
     field6_value = (
-        f'Wersja: {wine_kronfourek_version}'
+        f'Wersja: **{wine_kronfourek_version}**'
     )
     embedVar = discord.Embed(title=embed_title, color=0x00ff00)
     embedVar.add_field(name=field1_name, value=field1_value, inline=False)
@@ -341,14 +341,6 @@ async def wallpaper(ctx):
     await channel.send(
         f'{wp}'
     )
-
-@client.command()
-async def test(ctx):
-    channel = client.get_channel(cfg_channel)
-    embedVar = discord.Embed(title="Test", description="Testowy opis", color=0x00ff00)
-    embedVar.add_field(name="Pole #1", value="Wartość pola #1", inline=False)
-    embedVar.add_field(name="Pole #2", value="ęśąćż", inline=False)
-    await channel.send(embed=embedVar)
 
 
 ## tasks
