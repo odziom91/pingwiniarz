@@ -240,11 +240,10 @@ async def linver(ctx):
 @client.command()
 async def pobierz(ctx):
     channel = client.get_channel(cfg_channel)
-    await channel.send(
-        f'***Hiperłącza do pobrania najpopularniejszych dystrybucji Linux***'
-    )
-    await channel.send(
-        f'**Dla początkujących użytkowników:**\n'
+    embed_title = f'**Pobierz Linuksa!**'
+    embed_description = "Wybierz jedną z dystrybucji poniżej. Dystrybucje podzielone są według stopnia zaawansowania."
+    field1_name = f'**Dla początkujących użytkowników:**'
+    field1_value = (
         f'**Ubuntu** - pobierz: https://www.ubuntu.com/download/ \n'
         f'**Linux Mint** - pobierz: https://www.linuxmint.com/download.php \n'
         f'**Elementary OS** - pobierz: https://elementary.io/ \n'
@@ -252,9 +251,8 @@ async def pobierz(ctx):
         f'**Solus** - pobierz: https://getsol.us/download/ \n'
         f'**Pop!_OS** - pobierz: https://pop.system76.com/ \n'
     )
-    time.sleep(3)
-    await channel.send(
-        f'**Dla średnio-zaawansowanych użytkowników:**\n'
+    field2_name = f'**Dla średnio-zaawansowanych użytkowników:**'
+    field2_value = (
         f'**Fedora** - pobierz: https://getfedora.org/pl/ \n'
         f'**openSUSE** - pobierz: https://get.opensuse.org/pl/ \n'
         f'**Manjaro** - pobierz: https://manjaro.org/download/ \n'
@@ -262,9 +260,8 @@ async def pobierz(ctx):
         f'**MX Linux** - pobierz: https://mxlinux.org/download-links/#Mirrors \n'
         f'**Garuda Linux** - pobierz: https://garudalinux.org/downloads.html \n'
     )
-    time.sleep(3)
-    await channel.send(
-        f'**Dla zaawansowanych użytkowników:**\n'
+    field3_name = f'**Dla zaawansowanych użytkowników:**'
+    field3_value = (
         f'**Arch Linux** - pobierz: https://archlinux.org/download/ \n'
         f'**Gentoo Linux** - pobierz: http://www.gentoo.org/main/en/mirrors.xml \n'
         f'**Slackware Linux** - pobierz: http://www.slackware.com/getslack/ \n'
@@ -272,7 +269,12 @@ async def pobierz(ctx):
         f'**Qubes OS** - pobierz: https://www.qubes-os.org/downloads/ \n'
         f'**NixOS** - pobierz: http://nixos.org/nixos/download.html \n'
     )
-    time.sleep(3)
+    embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
+    embedVar.add_field(name=field2_name, value=field2_value, inline=False)
+    embedVar.add_field(name=field3_name, value=field3_value, inline=False)
+    await channel.send(embed=embedVar)
+
 
 @client.command()
 async def admin(ctx):
