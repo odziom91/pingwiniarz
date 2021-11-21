@@ -441,7 +441,7 @@ async def os_version_checker():
         cfg_os = config.get("os", os_1)
         chk_os = GetVersion_Distrowatch_OS(os_1, os_2)
         if chk_os != cfg_os:
-            embed_title = f'**Hej @everyone,** nowa wersja systemu operacyjnego **{os_3}** została wydana!'
+            embed_title = f'**Hej,** nowa wersja systemu operacyjnego **{os_3}** została wydana!'
             embed_description = f'Aktualna wersja to: **{chk_os}**\nZachęcamy do aktualizacji systemu!'
             embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
             await channel.send(embed=embedVar)
@@ -468,43 +468,43 @@ async def gaming_version_checker():
     chk_wine_kronfourek = GetVersion_Wine_Kronfourek().strip()
     chk_lutris = GetVersion_Lutris()
     if chk_wine != cfg_wine:
-        embed_title = f'**Hej @everyone,** pojawiła się nowa wersja Wine Stable!'
+        embed_title = f'**Hej,** pojawiła się nowa wersja Wine Stable!'
         embed_description = f'Aktualna wersja to: **{chk_wine}!**\nZachęcamy do aktualizacji!'
         embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
         await channel.send(embed=embedVar)
         config.set("gaming", "wine", chk_wine)
     if chk_wine_testing != cfg_wine_testing:
-        embed_title = f'**Hej @everyone,** pojawiła się nowa wersja Wine Testing!'
+        embed_title = f'**Hej,** pojawiła się nowa wersja Wine Testing!'
         embed_description = f'Aktualna wersja to: **{chk_wine_testing}!**\nZachęcamy do aktualizacji!'
         embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
         await channel.send(embed=embedVar)
         config.set("gaming", "wine_testing", chk_wine_testing)
     if chk_proton != cfg_proton:
-        embed_title = f'**Hej @everyone,** pojawiła się nowa wersja Proton!'
+        embed_title = f'**Hej,** pojawiła się nowa wersja Proton!'
         embed_description = f'Aktualna wersja to: **{chk_proton}!**\nZachęcamy do aktualizacji!'
         embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
         await channel.send(embed=embedVar)
         config.set("gaming", "proton", chk_proton)
     if chk_proton_ge != cfg_proton_ge:
-        embed_title = f'**Hej @everyone,** pojawiła się nowa wersja Proton-GE (GloriousEggroll)!'
+        embed_title = f'**Hej,** pojawiła się nowa wersja Proton-GE (GloriousEggroll)!'
         embed_description = f'Aktualna wersja to: **{chk_proton_ge}!**\nZachęcamy do aktualizacji!'
         embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
         await channel.send(embed=embedVar)
         config.set("gaming", "proton_ge", chk_proton_ge)
     if chk_wine_ge != cfg_wine_ge:
-        embed_title = f'**Hej @everyone,** pojawiła się nowa wersja Wine-GE (GloriousEggroll)!'
+        embed_title = f'**Hej,** pojawiła się nowa wersja Wine-GE (GloriousEggroll)!'
         embed_description = f'Aktualna wersja to: **{chk_wine_ge}!**\nZachęcamy do aktualizacji!'
         embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
         await channel.send(embed=embedVar)
         config.set("gaming", "wine_ge", chk_wine_ge)
     if chk_wine_kronfourek != cfg_wine_kronfourek:
-        embed_title = f'**Hej @everyone,** pojawiła się nowa wersja Wine Kron4ek (Vanilla build)!'
+        embed_title = f'**Hej,** pojawiła się nowa wersja Wine Kron4ek (Vanilla build)!'
         embed_description = f'Aktualna wersja to: **{chk_wine_kronfourek}!**\nZachęcamy do aktualizacji!'
         embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
         await channel.send(embed=embedVar)
         config.set("gaming", "wine_kronfourek", chk_wine_kronfourek)
     if chk_lutris != cfg_lutris:
-        embed_title = f'**Hej @everyone,** pojawiła się nowa wersja Lutris!'
+        embed_title = f'**Hej,** pojawiła się nowa wersja Lutris!'
         embed_description = f'Aktualna wersja to: **{chk_lutris}!**\nZachęcamy do aktualizacji!'
         embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
         await channel.send(embed=embedVar)
@@ -522,7 +522,7 @@ async def nvidia_version_checker():
     chk_nv_nfb_name, chk_nv_nfb_version, chk_nv_nfb_date = GetNvidia_nfb()
     chk_nv_pb_name, chk_nv_pb_version, chk_nv_pb_date = GetNvidia_pb()
     if chk_nv_nfb_version != cfg_nv_nfb:
-            embed_title = f'**Hej @everyone,** została wydana nowa wersja sterownika NVidia - "New Features Branch".'
+            embed_title = f'**Hej,** została wydana nowa wersja sterownika NVidia - "New Features Branch".'
             embed_description = f'Nazwa sterownika: {chk_nv_nfb_name}\nWersja: **{chk_nv_nfb_version}**\nData wydania: **{chk_nv_nfb_date}**'
             embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
             await channel.send(embed=embedVar)
@@ -531,7 +531,7 @@ async def nvidia_version_checker():
             await channel.send(
                 f'Hej, użytkownicy kart graficznych NVidia!\nZostała wydana nowa wersja sterownika "Production Branch".\nNazwa sterownika: {chk_nv_pb_name}\nWersja: **{chk_nv_pb_version}**\nData wydania: **{chk_nv_pb_date}**\n'
             )
-            embed_title = f'**Hej @everyone,** została wydana nowa wersja sterownika NVidia - "Production Branch".'
+            embed_title = f'**Hej,** została wydana nowa wersja sterownika NVidia - "Production Branch".'
             embed_description = f'Nazwa sterownika: {chk_nv_pb_name}\nWersja: **{chk_nv_pb_version}**\nData wydania: **{chk_nv_pb_date}**'
             embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
             await channel.send(embed=embedVar)
