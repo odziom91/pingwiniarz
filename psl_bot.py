@@ -44,7 +44,7 @@ async def on_command_error(ctx, error):
     field1_value = (
         f'Jeśli problem będzie się powtarzał prosimy o kontakt z Administracją.'
     )
-    embedVar = discord.Embed(title=embed_title, color=0x00ff00)
+    embedVar = discord.Embed(title=embed_title, color=0xff0000)
     embedVar.add_field(name=field1_name, value=field1_value, inline=False)
     await channel.send(embed=embedVar)
 
@@ -282,73 +282,94 @@ async def admin(ctx):
     str1 = '\n'.join(head_admins)
     str2 = '\n'.join(admins)
     str3 = '\n'.join(mods)
-    await channel.send(
-        f'***Administracja serwera {server_name}***\n'
-        f'**Główni administratorzy:**\n'
+    embed_title = f'**Administracja serwera {server_name}**'
+    embed_description = "Poniżej znajdziesz listę administratorów i moderatorów serwera."
+    field1_name = f'**Główni administratorzy:**'
+    field1_value = (
         f'{str1}'
-        f'\n**Administratorzy:**\n'
+    )
+    field2_name = f'**Administratorzy:**'
+    field2_value = (
         f'{str2}'
-        f'\n**Moderatorzy:**\n'
+    )
+    field3_name = f'**Moderatorzy:**'
+    field3_value = (
         f'{str3}'
     )
+    embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
+    embedVar.add_field(name=field2_name, value=field2_value, inline=False)
+    embedVar.add_field(name=field3_name, value=field3_value, inline=False)
+    await channel.send(embed=embedVar)
+
 
 @client.command()
 async def support(ctx):
     channel = client.get_channel(cfg_channel)
     str1 = '\n'.join(supporters)
-    await channel.send(
-        f'***Oto lista wspierających serwer {server_name}***\n'
-        f'{str1}\n\n'
-        f'Jeśli chcesz znaleźć się na tej liście koniecznie zajrzyj na kanał #wesprzyj_nas \n'
+    embed_title = f'**Wspierający serwer {server_name}**'
+    embed_description = f'Jeśli chcesz znaleźć się na tej liście koniecznie zajrzyj na kanał **#wesprzyj_nas**'
+    field1_name = f'**Oto lista wspierających serwer {server_name}:**'
+    field1_value = (
+        f'{str1}'
     )
+    embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
+    await channel.send(embed=embedVar)
 
 @client.command()
 async def cat(ctx):
     channel = client.get_channel(cfg_channel)
     cat = GetCat()
-    await channel.send(
-        f'{cat}'
-    )
+    embed_title = f'**Wylosowano kociaka**'
+    embedVar = discord.Embed(title=embed_title, color=embed_color)
+    embedVar.set_image(url=dog)
+    await channel.send(embed=embedVar)
 
 @client.command()
 async def dog(ctx):
     channel = client.get_channel(cfg_channel)
     dog = GetReddit('dogpictures')
-    await channel.send(
-        f'{dog}'
-    )
+    embed_title = f'**Wylosowano psiaka**'
+    embedVar = discord.Embed(title=embed_title, color=embed_color)
+    embedVar.set_image(url=dog)
+    await channel.send(embed=embedVar)
 
 @client.command()
 async def linuxmeme(ctx):
     channel = client.get_channel(cfg_channel)
     meme = GetReddit('linuxmemes')
-    await channel.send(
-        f'{meme}'
-    )
+    embed_title = f'**Memy o Linuksie**'
+    embedVar = discord.Embed(title=embed_title, color=embed_color)
+    embedVar.set_image(url=meme)
+    await channel.send(embed=embedVar)
 
 @client.command()
 async def windowsmeme(ctx):
     channel = client.get_channel(cfg_channel)
     meme = GetReddit('windowsmemes')
-    await channel.send(
-        f'{meme}'
-    )
+    embed_title = f'**Memy o Windowsie**'
+    embedVar = discord.Embed(title=embed_title, color=embed_color)
+    embedVar.set_image(url=meme)
+    await channel.send(embed=embedVar)
 
 @client.command()
 async def plmeme(ctx):
     channel = client.get_channel(cfg_channel)
     meme = GetReddit('Polska_wpz')
-    await channel.send(
-        f'{meme}'
-    )
+    embed_title = f'**Polskie memy z Reddita**'
+    embedVar = discord.Embed(title=embed_title, color=embed_color)
+    embedVar.set_image(url=meme)
+    await channel.send(embed=embedVar)
 
 @client.command()
 async def meme(ctx):
     channel = client.get_channel(cfg_channel)
     meme = GetReddit('memes')
-    await channel.send(
-        f'{meme}'
-    )
+    embed_title = f'**Memy z Reddita**'
+    embedVar = discord.Embed(title=embed_title, color=embed_color)
+    embedVar.set_image(url=meme)
+    await channel.send(embed=embedVar)
 
 @client.command()
 async def papameme(ctx):
@@ -356,12 +377,7 @@ async def papameme(ctx):
     meme = GetPapiez()
     channel = client.get_channel(cfg_channel)
     embed_title = f'**Papa Meme from API by Mopsior**'
-    field1_name = f'Wylosowano mema:'
-    field1_value = (
-        f'{meme}'
-    )
     embedVar = discord.Embed(title=embed_title, color=embed_color)
-    #embedVar.add_field(name=field1_name, value=field1_value, inline=False)
     embedVar.set_image(url=meme)
     await channel.send(embed=embedVar)
 
@@ -369,17 +385,19 @@ async def papameme(ctx):
 async def unixporn(ctx):
     channel = client.get_channel(cfg_channel)
     unixporn = GetReddit('unixporn')
-    await channel.send(
-        f'{unixporn}'
-    )
+    embed_title = f'**r/unixporn**'
+    embedVar = discord.Embed(title=embed_title, color=embed_color)
+    embedVar.set_image(url=unixporn)
+    await channel.send(embed=embedVar)
 
 @client.command()
 async def wallpaper(ctx):
     channel = client.get_channel(cfg_channel)
     wp = GetWallpaper()
-    await channel.send(
-        f'{wp}'
-    )
+    embed_title = f'**Wylosowano tapetkę**'
+    embedVar = discord.Embed(title=embed_title, color=embed_color)
+    embedVar.set_image(url=wp)
+    await channel.send(embed=embedVar)
 
 
 ## tasks
@@ -423,9 +441,10 @@ async def os_version_checker():
         cfg_os = config.get("os", os_1)
         chk_os = GetVersion_Distrowatch_OS(os_1, os_2)
         if chk_os != cfg_os:
-            await channel.send(
-                f'Hej!\nNowa wersja systemu operacyjnego **{os_3}** została wydana!\nAktualna wersja to: **{chk_os}**\nZachęcamy do aktualizacji systemu.\n'
-            )
+            embed_title = f'**Hej @everyone,** nowa wersja systemu operacyjnego **{os_3}** została wydana!'
+            embed_description = f'Aktualna wersja to: **{chk_os}**\nZachęcamy do aktualizacji systemu!'
+            embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+            await channel.send(embed=embedVar)
             config.set("os", os_1, chk_os)
     with open('./psl_version_checker.ini', 'w') as configfile:
         config.write(configfile)
@@ -449,39 +468,46 @@ async def gaming_version_checker():
     chk_wine_kronfourek = GetVersion_Wine_Kronfourek().strip()
     chk_lutris = GetVersion_Lutris()
     if chk_wine != cfg_wine:
-        await channel.send(
-            f'Hej!\nPojawiła się nowa wersja Wine Stable!\nAktualna wersja to: **{chk_wine}!**\n'
-        )
+        embed_title = f'**Hej @everyone,** pojawiła się nowa wersja Wine Stable!'
+        embed_description = f'Aktualna wersja to: **{chk_wine}!**\nZachęcamy do aktualizacji!'
+        embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+        await channel.send(embed=embedVar)
         config.set("gaming", "wine", chk_wine)
     if chk_wine_testing != cfg_wine_testing:
-        await channel.send(
-            f'Hej!\nPojawiła się nowa wersja Wine Testing!\nAktualna wersja to: **{chk_wine_testing}!**\n'
-        )
+        embed_title = f'**Hej @everyone,** pojawiła się nowa wersja Wine Testing!'
+        embed_description = f'Aktualna wersja to: **{chk_wine_testing}!**\nZachęcamy do aktualizacji!'
+        embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+        await channel.send(embed=embedVar)
         config.set("gaming", "wine_testing", chk_wine_testing)
     if chk_proton != cfg_proton:
-        await channel.send(
-            f'Hej!\nPojawiła się nowa wersja Proton!\nAktualna wersja to: **{chk_proton}!**\n'
-        )
+        embed_title = f'**Hej @everyone,** pojawiła się nowa wersja Proton!'
+        embed_description = f'Aktualna wersja to: **{chk_proton}!**\nZachęcamy do aktualizacji!'
+        embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+        await channel.send(embed=embedVar)
         config.set("gaming", "proton", chk_proton)
     if chk_proton_ge != cfg_proton_ge:
-        await channel.send(
-            f'Hej!\nPojawiła się nowa wersja Proton-GE!\nAktualna wersja to: **{chk_proton_ge}!**\n'
-        )
+        embed_title = f'**Hej @everyone,** pojawiła się nowa wersja Proton-GE (GloriousEggroll)!'
+        embed_description = f'Aktualna wersja to: **{chk_proton_ge}!**\nZachęcamy do aktualizacji!'
+        embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+        await channel.send(embed=embedVar)
         config.set("gaming", "proton_ge", chk_proton_ge)
     if chk_wine_ge != cfg_wine_ge:
-        await channel.send(
-            f'Hej!\nPojawiła się nowa wersja Wine-GE!\nAktualna wersja to: **{chk_wine_ge}!**\n'
-        )
+        embed_title = f'**Hej @everyone,** pojawiła się nowa wersja Wine-GE (GloriousEggroll)!'
+        embed_description = f'Aktualna wersja to: **{chk_wine_ge}!**\nZachęcamy do aktualizacji!'
+        embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+        await channel.send(embed=embedVar)
         config.set("gaming", "wine_ge", chk_wine_ge)
     if chk_wine_kronfourek != cfg_wine_kronfourek:
-        await channel.send(
-            f'Hej!\nPojawiła się nowa wersja Wine Kron4ek (Vanilla build)!\nAktualna wersja to: **{chk_wine_kronfourek}!**\n'
-        )
+        embed_title = f'**Hej @everyone,** pojawiła się nowa wersja Wine Kron4ek (Vanilla build)!'
+        embed_description = f'Aktualna wersja to: **{chk_wine_kronfourek}!**\nZachęcamy do aktualizacji!'
+        embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+        await channel.send(embed=embedVar)
         config.set("gaming", "wine_kronfourek", chk_wine_kronfourek)
     if chk_lutris != cfg_lutris:
-        await channel.send(
-            f'Hej!\nPojawiła się nowa wersja Lutris!\nAktualna wersja to: **{chk_lutris}!**\n'
-        )
+        embed_title = f'**Hej @everyone,** pojawiła się nowa wersja Lutris!'
+        embed_description = f'Aktualna wersja to: **{chk_lutris}!**\nZachęcamy do aktualizacji!'
+        embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+        await channel.send(embed=embedVar)
         config.set("gaming", "lutris", chk_lutris)
     with open('./psl_version_checker.ini', 'w') as configfile:
         config.write(configfile)
@@ -496,14 +522,19 @@ async def nvidia_version_checker():
     chk_nv_nfb_name, chk_nv_nfb_version, chk_nv_nfb_date = GetNvidia_nfb()
     chk_nv_pb_name, chk_nv_pb_version, chk_nv_pb_date = GetNvidia_pb()
     if chk_nv_nfb_version != cfg_nv_nfb:
-            await channel.send(
-                f'Hej, użytkownicy kart graficznych NVidia!\nZostała wydana nowa wersja sterownika "New Features Branch".\nNazwa sterownika: {chk_nv_nfb_name}\nWersja: **{chk_nv_nfb_version}**\nData wydania: **{chk_nv_nfb_date}**\n'
-            )
+            embed_title = f'**Hej @everyone,** została wydana nowa wersja sterownika NVidia - "New Features Branch".'
+            embed_description = f'Nazwa sterownika: {chk_nv_nfb_name}\nWersja: **{chk_nv_nfb_version}**\nData wydania: **{chk_nv_nfb_date}**'
+            embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+            await channel.send(embed=embedVar)
             config.set("video", "nvidia_nfb", chk_nv_nfb_version)
     if chk_nv_pb_version != cfg_nv_pb:
             await channel.send(
                 f'Hej, użytkownicy kart graficznych NVidia!\nZostała wydana nowa wersja sterownika "Production Branch".\nNazwa sterownika: {chk_nv_pb_name}\nWersja: **{chk_nv_pb_version}**\nData wydania: **{chk_nv_pb_date}**\n'
             )
+            embed_title = f'**Hej @everyone,** została wydana nowa wersja sterownika NVidia - "Production Branch".'
+            embed_description = f'Nazwa sterownika: {chk_nv_pb_name}\nWersja: **{chk_nv_pb_version}**\nData wydania: **{chk_nv_pb_date}**'
+            embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+            await channel.send(embed=embedVar)
             config.set("video", "nvidia_pb", chk_nv_pb_version)
     with open('./psl_version_checker.ini', 'w') as configfile:
         config.write(configfile)
