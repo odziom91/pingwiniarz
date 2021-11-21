@@ -16,3 +16,9 @@ def GetReddit(subreddit):
     for entry in page:
         meme = json.loads(entry.decode("utf-8"))
     return meme["url"]
+
+def GetPapiez():
+    page = request.urlopen(f'https://api.mopsior.pl/api/papiez')
+    for entry in page:
+        meme = json.loads(entry.decode("utf-8"))
+    return meme["link"]

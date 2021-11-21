@@ -19,6 +19,7 @@ admins = config.get("config","admins").split(",")
 mods = config.get("config","mods").split(",")
 supporters = config.get("config","supporters").split(",")
 token = config.get("config","token")
+embed_color = 0x2596be
 #####
 
 ##### discord part
@@ -325,6 +326,20 @@ async def meme(ctx):
     await channel.send(
         f'{meme}'
     )
+
+@client.command()
+async def papameme(ctx):
+    channel = client.get_channel(cfg_channel)
+    meme = GetPapiez()
+    channel = client.get_channel(cfg_channel)
+    embed_title = f'**Papa Meme from API by Mopsior**'
+    field1_name = f'Wylosowano mema:'
+    field1_value = (
+        f'{meme}'
+    )
+    embedVar = discord.Embed(title=embed_title, color=embed_color)
+    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
+    await channel.send(embed=embedVar)
 
 @client.command()
 async def unixporn(ctx):
