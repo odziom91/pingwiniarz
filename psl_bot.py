@@ -74,77 +74,97 @@ async def pomoc(ctx):
         f'Więcej komend wkrótce...\n'
         f'W przypadku problemów z działaniem bota prosimy o kontakt z Administracją.\n'
     )
+    field4_name = f'Ważne!'
+    field4_value = (
+        f'Więcej komend wkrótce...\n'
+        f'W przypadku problemów z działaniem bota prosimy o kontakt z Administracją.\n'
+    )
     embedVar = discord.Embed(title=embed_title, color=0x00ff00)
     embedVar.add_field(name=field1_name, value=field1_value, inline=False)
     embedVar.add_field(name=field2_name, value=field2_value, inline=False)
     embedVar.add_field(name=field3_name, value=field3_value, inline=False)
-    embedVar.add_field(value=field4_value, inline=False)
+    embedVar.add_field(name=field4_name, value=field4_value, inline=False)
     await channel.send(embed=embedVar)
-    # await channel.send(
-    #     f'***Pomoc dla {bot_name}***\n'
-    #     f'\n'
-    #     f'Komendy dotyczące serwera:\n'
-    #     f'**;admin** - aktualny zespół administracji i moderatorów\n'
-    #     f'**;support** - lista wspierających serwer'
-    #     f'\n'
-    #     f'Komendy dotyczące Linuksa:\n'
-    #     f'**;linver** - informacja o aktualnie dostępnych wersjach wybranych dystrybucji Linuksa\n'
-    #     f'**;gaming** - informacja o aktualnie dostępnych wersjach oprogramowania dla graczy - Lutris, Wine, Proton, etc.\n'
-    #     f'**;pobierz** - lista hiperłączy dla wybranych dystrybucji do pobrania\n'
-    #     f'**;nvidia** - informacja o sterownikach wideo kart graficznych NVidia'
-    #     f'\n'
-    #     f'Pozostałe:\n'
-    #     f'**;cat** - losuj słodkiego kota\n'
-    #     f'**;dog** - losuj słodkiego psa\n'
-    #     f'**;linuxmeme** - losuj mema o Linuksie\n'
-    #     f'**;windowsmeme** - losuj mema o Windowsie\n'
-    #     f'**;plmeme** - losuj polskiego mema\n'
-    #     f'**;meme** - losuj zagranicznego mema\n'
-    #     f'**;unixporn** - losuj desktop\n'
-    #     f'**;wallpaper** - inspiracja na tapetę\n'
-    #     f'\n'
-    #     f'Więcej komend wkrótce...\n'
-    #     f'W przypadku problemów z działaniem bota prosimy o kontakt z Administracją.\n'
-    # )
+    
 
 @client.command()
 async def nvidia(ctx):
-    channel = client.get_channel(cfg_channel)
     config = configparser.ConfigParser()
     config.read('./psl_version_checker.ini')
     cfg_nv_nfb = config.get("video", "nvidia_nfb")
     cfg_nv_pb = config.get("video", "nvidia_pb")
-    await channel.send(
-                f'***Oto najnowsze wersje sterowników wideo dla kart graficznych NVidia***\n'
-                f'NVidia - New Feature Branch: **{cfg_nv_nfb}**\n'
-                f'NVidia - Production Branch: **{cfg_nv_pb}**\n'
-                f'\n'
-                f'Jeśli to możliwe zalecamy instalację sterownika z linii New Feature Branch.\n'
-            )
+
+    channel = client.get_channel(cfg_channel)
+    embed_title = f'Aktualne sterowniki do kart graficznych NVidia'
+    field1_name = f'NVidia - New Feature Branch'
+    field1_value = (
+        f'Wersja: **{cfg_nv_nfb}**'
+    )
+    field2_name = f'NVidia - Production Branch'
+    field2_value = (
+        f'Wersja: **{cfg_nv_pb}**'
+    )
+    field3_name = f'Porada'
+    field3_value = (
+        f'Jeśli to możliwe zalecamy instalację sterownika z linii New Feature Branch.'
+    )
+    embedVar = discord.Embed(title=embed_title, color=0x00ff00)
+    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
+    embedVar.add_field(name=field2_name, value=field2_value, inline=False)
+    embedVar.add_field(name=field3_name, value=field3_value, inline=False)
+    await channel.send(embed=embedVar)
+
 
 @client.command()
 async def gaming(ctx):
     channel = client.get_channel(cfg_channel)
-    await channel.send(
-        f'Proszę poczekać - pobieram aktualne dane...\n\n'
-    )
+
+    wait_title = f'Proszę poczekać - pobieram aktualne dane...'
+    wait_embed = discord.Embed(title=wait_title, color=0x00ff00)
+    await channel.send(embed=wait_embed)
+
     wine_versions = GetVersion_Wine()
     lutris_version = GetVersion_Lutris()
     proton_version = GetVersion_Proton()
     proton_ge_version = GetVersion_Proton_GE()
     wine_ge_version = GetVersion_Wine_GE()
     wine_kronfourek_version = GetVersion_Wine_Kronfourek()
-    await channel.send(
-        f'***Aktualne wersje oprogramowania dla graczy***\n'
-        f'**Lutris**\nStable: {lutris_version}\n'
-        f'***Oficjalne wersje Wine/Proton***\n'
-        f'**Wine**\nStable: {wine_versions[0]}\nTesting: {wine_versions[1]}\n'
-        f'**Proton**\nStable: {proton_version}\n'
-        f'***Nieoficjalne wersje Wine/Proton***\n'
-        f'**Proton-GE**\nStable: {proton_ge_version}\n'
-        f'**Wine-GE**\nStable: {wine_ge_version}\n'
-        f'**Kron4ek Wine**\nStable: {wine_kronfourek_version}\n'
+
+    embed_title = f'***Aktualne wersje oprogramowania dla graczy***'
+    field1_name = f'**Lutris**'
+    field1_value = (
+        f'Wersja: **{lutris_version}**'
     )
+    field2_name = f'Wine'
+    field2_value = (
+        f'Stable - wersja: **{wine_versions[0]}**\n'
+        f'Testing - wersja: **{wine_versions[1]}**'
+    )
+    field3_name = f'Proton'
+    field3_value = (
+        f'Wersja: {proton_version}'
+    )
+    field4_name = f'Proton-GE'
+    field4_value = (
+        f'Wersja: {proton_ge_version}'
+    )
+    field5_name = f'Wine-GE'
+    field5_value = (
+        f'Wersja: {wine_ge_version}'
+    )
+    field6_name = f'Kron4ek Wine'
+    field6_value = (
+        f'Wersja: {wine_kronfourek_version}'
+    )
+    embedVar = discord.Embed(title=embed_title, color=0x00ff00)
+    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
+    embedVar.add_field(name=field2_name, value=field2_value, inline=False)
+    embedVar.add_field(name=field3_name, value=field3_value, inline=False)
+    embedVar.add_field(name=field4_name, value=field4_value, inline=False)
+    embedVar.add_field(name=field5_name, value=field5_value, inline=False)
+    embedVar.add_field(name=field6_name, value=field6_value, inline=False)
+    await channel.send(embed=embedVar)
+
 
 @client.command()
 async def linver(ctx):
