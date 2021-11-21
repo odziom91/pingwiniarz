@@ -47,7 +47,7 @@ async def on_command_error(ctx, error):
     embedVar = discord.Embed(title=embed_title, color=0x00ff00)
     embedVar.add_field(name=field1_name, value=field1_value, inline=False)
     await channel.send(embed=embedVar)
-    
+
 ## commands
 @client.command()
 async def pomoc(ctx):
@@ -176,7 +176,9 @@ async def gaming(ctx):
 @client.command()
 async def linver(ctx):
     channel = client.get_channel(cfg_channel)
-    distrowatch = []
+    distrowatch_beginners = []
+    distrowatch_middle = []
+    distrowatch_advanced = []
     os_list_beginners = [
         ("ubuntu", 1, "Ubuntu"),
         ("mint", 0, "Linux Mint"),
@@ -201,26 +203,39 @@ async def linver(ctx):
         ("qubes", 0, "Qubes OS"),
         ("nixos", 0, "NixOS")
     ]
-    distrowatch.append(f'***Aktualne wersje najpopularniejszych dystrybucji Linuksa***')
-    distrowatch.append(f'**Dla początkujących użytkowników:**')
     for os in os_list_beginners:
         os_1, os_2, os_3 = os
         chk_os = GetVersion_Distrowatch_OS(os_1, os_2)
-        distrowatch.append(f'{os_3}: **{chk_os}**')
-    distrowatch.append(f'**Dla średnio zaawansowanych użytkowników:**')
+        distrowatch_beginners.append(f'{os_3}: **{chk_os}**')
     for os in os_list_middle:
         os_1, os_2, os_3 = os
         chk_os = GetVersion_Distrowatch_OS(os_1, os_2)
-        distrowatch.append(f'{os_3}: **{chk_os}**')
-    distrowatch.append(f'**Dla zaawansowanych użytkowników:**')
+        distrowatch_middle.append(f'{os_3}: **{chk_os}**')
     for os in os_list_advanced:
         os_1, os_2, os_3 = os
         chk_os = GetVersion_Distrowatch_OS(os_1, os_2)
-        distrowatch.append(f'{os_3}: **{chk_os}**')
-    str1 = '\n'.join(distrowatch)
-    await channel.send(
+        distrowatch_advanced.append(f'{os_3}: **{chk_os}**')
+    str1 = '\n'.join(distrowatch_beginners)
+    str2 = '\n'.join(distrowatch_middle)
+    str3 = '\n'.join(distrowatch_advanced)
+    embed_title = f'**Aktualne wersje najpopularniejszych dystrybucji Linuksa**'
+    field1_name = f'**Dla początkujących użytkowników:**'
+    field1_value = (
         f'{str1}'
     )
+    field2_name = f'**Dla średnio zaawansowanych użytkowników:**'
+    field2_value = (
+        f'{str2}'
+    )
+    field3_name = f'**Dla zaawansowanych użytkowników:**'
+    field3_value = (
+        f'{str3}'
+    )
+    embedVar = discord.Embed(title=embed_title, color=embed_color)
+    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
+    embedVar.add_field(name=field2_name, value=field2_value, inline=False)
+    embedVar.add_field(name=field3_name, value=field3_value, inline=False)
+    await channel.send(embed=embedVar)
 
 @client.command()
 async def pobierz(ctx):
