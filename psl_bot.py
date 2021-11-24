@@ -73,7 +73,7 @@ async def pomoc(ctx):
         f'**;windowsmeme** - losuj mema o Windowsie\n'
         f'**;plmeme** - losuj polskiego mema\n'
         f'**;meme** - losuj zagranicznego mema\n'
-        f'**;papameme** - "po maturze chodziliśmy na kremówki" ;)'
+        f'**;papameme** - "po maturze chodziliśmy na kremówki" ;)\n'
         f'**;unixporn** - losuj desktop\n'
         f'**;wallpaper** - inspiracja na tapetę\n'
     )
