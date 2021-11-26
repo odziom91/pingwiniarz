@@ -73,7 +73,7 @@ async def pomoc(ctx):
         f'**;windowsmeme** - losuj mema o Windowsie\n'
         f'**;plmeme** - losuj polskiego mema\n'
         f'**;meme** - losuj zagranicznego mema\n'
-        f'**;papameme** - "po maturze chodziliśmy na kremówki" ;)'
+        f'**;papameme** - "po maturze chodziliśmy na kremówki" ;)\n'
         f'**;unixporn** - losuj desktop\n'
         f'**;wallpaper** - inspiracja na tapetę\n'
     )
@@ -186,6 +186,7 @@ async def linver(ctx):
         ("zorin", 0, "Zorin OS"),
         ("solus", 0, "Solus"),
         ("popos", 0, "Pop!_OS")
+        ("neon",  0, "KDE Neon")
     ]
     os_list_middle = [
         ("fedora", 1, "Fedora"),
@@ -202,6 +203,7 @@ async def linver(ctx):
         ("lfs", 1, "Linux From Scratch"),
         ("qubes", 0, "Qubes OS"),
         ("nixos", 0, "NixOS")
+        ("void", 0, "Void Linux"
     ]
     for os in os_list_beginners:
         os_1, os_2, os_3 = os
@@ -250,6 +252,7 @@ async def pobierz(ctx):
         f'**Zorin OS** - pobierz: https://zorinos.com/download \n'
         f'**Solus** - pobierz: https://getsol.us/download/ \n'
         f'**Pop!_OS** - pobierz: https://pop.system76.com/ \n'
+        F'**KDE NEON** - pobierz: https://neon.kde.org/ \n'
     )
     field2_name = f'**Dla średnio-zaawansowanych użytkowników:**'
     field2_value = (
@@ -268,6 +271,7 @@ async def pobierz(ctx):
         f'**Linux From Scratch** - pobierz: http://www.linuxfromscratch.org/lfs/download.html \n'
         f'**Qubes OS** - pobierz: https://www.qubes-os.org/downloads/ \n'
         f'**NixOS** - pobierz: http://nixos.org/nixos/download.html \n'
+        f'**Void Linux** - pobierz: https://voidlinux.org/ \n'
     )
     embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
     embedVar.add_field(name=field1_name, value=field1_value, inline=False)
@@ -323,7 +327,7 @@ async def cat(ctx):
     cat = GetCat()
     embed_title = f'**Wylosowano kociaka**'
     embedVar = discord.Embed(title=embed_title, color=embed_color)
-    embedVar.set_image(url=dog)
+    embedVar.set_image(url=cat)
     await channel.send(embed=embedVar)
 
 @client.command()
@@ -419,6 +423,7 @@ async def os_version_checker():
     os_list = [
         ("ubuntu", 1, "Ubuntu"),
         ("popos", 0, "Pop!_OS"),
+        ("neon", 0, "KDE Neon"
         ("elementary", 0, "Elementary OS"),
         ("mint", 0, "Linux Mint"),
         ("zorin", 0, "Zorin OS"),
