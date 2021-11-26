@@ -1,10 +1,11 @@
 import configparser
 import discord
-import time
+from ast import literal_eval
 from random import randint
 from modules.psl_GetVideo import *
 from modules.psl_GetVersion import *
 from modules.psl_Fun import *
+from modules.psl_GetKernel import *
 from discord.ext import commands, tasks
 
 ##### init vars
@@ -35,6 +36,7 @@ async def on_ready():
     gaming_version_checker.start()
     os_version_checker.start()
     nvidia_version_checker.start()
+    kernel_checker.start()
 
 @client.event
 async def on_command_error(ctx, error):
@@ -61,6 +63,7 @@ async def pomoc(ctx):
     field2_name = f'Komendy dotyczące Linuksa:'
     field2_value = (
         f'**;linver** - informacja o aktualnie dostępnych wersjach wybranych dystrybucji Linuksa\n'
+        f'**;kernel** - informacja o aktualnie dostępnych wersjach kernela Linuksa\n'
         f'**;gaming** - informacja o aktualnie dostępnych wersjach oprogramowania dla graczy - Lutris, Wine, Proton, etc.\n'
         f'**;pobierz** - lista hiperłączy dla wybranych dystrybucji do pobrania\n'
         f'**;nvidia** - informacja o sterownikach wideo kart graficznych NVidia'
@@ -185,8 +188,8 @@ async def linver(ctx):
         ("elementary", 0, "Elementary OS"),
         ("zorin", 0, "Zorin OS"),
         ("solus", 0, "Solus"),
-        ("popos", 0, "Pop!_OS")
-        ("neon",  0, "KDE Neon")
+        ("popos", 0, "Pop!_OS"),
+        ("kdeneon",  0, "KDE neon")
     ]
     os_list_middle = [
         ("fedora", 1, "Fedora"),
@@ -202,8 +205,8 @@ async def linver(ctx):
         ("slackware", 0, "Slackware Linux"),
         ("lfs", 1, "Linux From Scratch"),
         ("qubes", 0, "Qubes OS"),
-        ("nixos", 0, "NixOS")
-        ("void", 0, "Void Linux"
+        ("nixos", 0, "NixOS"),
+        ("void", 0, "Void Linux")
     ]
     for os in os_list_beginners:
         os_1, os_2, os_3 = os
@@ -252,7 +255,7 @@ async def pobierz(ctx):
         f'**Zorin OS** - pobierz: https://zorinos.com/download \n'
         f'**Solus** - pobierz: https://getsol.us/download/ \n'
         f'**Pop!_OS** - pobierz: https://pop.system76.com/ \n'
-        F'**KDE NEON** - pobierz: https://neon.kde.org/ \n'
+        F'**KDE neon** - pobierz: https://neon.kde.org/download \n'
     )
     field2_name = f'**Dla średnio-zaawansowanych użytkowników:**'
     field2_value = (
@@ -271,7 +274,7 @@ async def pobierz(ctx):
         f'**Linux From Scratch** - pobierz: http://www.linuxfromscratch.org/lfs/download.html \n'
         f'**Qubes OS** - pobierz: https://www.qubes-os.org/downloads/ \n'
         f'**NixOS** - pobierz: http://nixos.org/nixos/download.html \n'
-        f'**Void Linux** - pobierz: https://voidlinux.org/ \n'
+        f'**Void Linux** - pobierz: https://voidlinux.org/download/ \n'
     )
     embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
     embedVar.add_field(name=field1_name, value=field1_value, inline=False)
@@ -403,6 +406,38 @@ async def wallpaper(ctx):
     embedVar.set_image(url=wp)
     await channel.send(embed=embedVar)
 
+@client.command()
+async def kernel(ctx):
+    channel = client.get_channel(cfg_channel)
+    config = configparser.ConfigParser()
+    config.read('./psl_version_checker.ini')
+    cfg_kernel_mainline = config.get("kernel", "mainline")
+    cfg_kernel_stable = config.get("kernel", "stable")
+    cfg_kernel_longterm = config.get("kernel", "longterm")
+    kernel_mainline = literal_eval(cfg_kernel_mainline)
+    kernel_stable = literal_eval(cfg_kernel_stable)
+    kernel_longterm = literal_eval(cfg_kernel_longterm)
+    str1 = '\n'.join(kernel_mainline)
+    str2 = '\n'.join(kernel_stable)
+    str3 = '\n'.join(kernel_longterm)
+    embed_title = f'**kernel.org - najnowsze wersje kernela**'
+    field1_name = f'**Gałąż mainline:**'
+    field1_value = (
+        f'{str1}'
+    )
+    field2_name = f'**Gałąż stable:**'
+    field2_value = (
+        f'{str2}'
+    )
+    field3_name = f'**Gałąź longterm:**'
+    field3_value = (
+        f'{str3}'
+    )
+    embedVar = discord.Embed(title=embed_title, color=embed_color)
+    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
+    embedVar.add_field(name=field2_name, value=field2_value, inline=False)
+    embedVar.add_field(name=field3_name, value=field3_value, inline=False)
+    await channel.send(embed=embedVar)
 
 ## tasks
 @tasks.loop(seconds=25.0)
@@ -423,7 +458,7 @@ async def os_version_checker():
     os_list = [
         ("ubuntu", 1, "Ubuntu"),
         ("popos", 0, "Pop!_OS"),
-        ("neon", 0, "KDE Neon"
+        ("kdeneon", 0, "KDE neon"),
         ("elementary", 0, "Elementary OS"),
         ("mint", 0, "Linux Mint"),
         ("zorin", 0, "Zorin OS"),
@@ -439,7 +474,8 @@ async def os_version_checker():
         ("slackware", 0, "Slackware Linux"),
         ("lfs", 1, "Linux From Scratch"),
         ("qubes", 0, "Qubes OS"),
-        ("nixos", 0, "NixOS")
+        ("nixos", 0, "NixOS"),
+        ("void", 0, "Void Linux")
     ]
     for os in os_list:
         os_1, os_2, os_3 = os
@@ -541,6 +577,39 @@ async def nvidia_version_checker():
             embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
             await channel.send(embed=embedVar)
             config.set("video", "nvidia_pb", chk_nv_pb_version)
+    with open('./psl_version_checker.ini', 'w') as configfile:
+        config.write(configfile)
+
+@tasks.loop(hours=1)
+async def kernel_checker():
+    channel = client.get_channel(cfg_channel)
+    config = configparser.ConfigParser()
+    config.read('./psl_version_checker.ini')
+    cfg_kernel_mainline = config.get("kernel", "mainline")
+    cfg_kernel_stable = config.get("kernel", "stable")
+    cfg_kernel_longterm = config.get("kernel", "longterm")
+    kernel_mainline = literal_eval(cfg_kernel_mainline)
+    kernel_stable = literal_eval(cfg_kernel_stable)
+    kernel_longterm = literal_eval(cfg_kernel_longterm)
+    chk_kernel_mainline, chk_kernel_stable, chk_kernel_longterm = GetKernel()
+    if chk_kernel_mainline != kernel_mainline:
+        embed_title = f'**Hej,** Kernel - **gałąż mainline** - został wydany!\n'
+        embed_description = f'Aktualna wersja to: **{chk_kernel_mainline[0]}**\n'
+        embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+        await channel.send(embed=embedVar)
+        config.set("kernel", "mainline", str(chk_kernel_mainline))
+    if chk_kernel_stable != kernel_stable:
+        embed_title = f'**Hej,** Kernel - **gałąż stable** - został wydany!\n'
+        embed_description = f'Aktualna wersja to: **{chk_kernel_stable[0]}**\n'
+        embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+        await channel.send(embed=embedVar)
+        config.set("kernel", "stable", str(chk_kernel_stable))
+    if chk_kernel_longterm != kernel_longterm:
+        embed_title = f'**Hej,** Kernel - **gałąż longterm** - został wydany!\n'
+        embed_description = f'Aktualna wersja to: **{chk_kernel_longterm[0]}**\n'
+        embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
+        await channel.send(embed=embedVar)
+        config.set("kernel", "longterm", str(chk_kernel_longterm))
     with open('./psl_version_checker.ini', 'w') as configfile:
         config.write(configfile)
 
