@@ -2,7 +2,7 @@
 Bot Discord dla społeczności "Polska Społeczność Linuxa"
 
 ## O "Pingwiniarzu"
-Głównym zadaniem "Pingwiniarza" jest informowanie użytkowników Discorda o nowych wersjach dystrybucji Linuksa oraz oprogramowaniu dla graczy.
+Głównym zadaniem "Pingwiniarza" jest informowanie użytkowników Discorda o nowych wersjach kernela, dystrybucji Linuksa oraz oprogramowania.
 
 Dodatkowo dzięki zaimplementowanym funkcjom możliwe jest sprawdzenie tych informacji w dowolnym momencie. Jako smaczek pojawiły się tu również parsery dla zdjęć z kilku portali.
 
@@ -32,7 +32,7 @@ Bot cały czas jest w rozbudowie.
 
 Lista systemów operacyjnych może ulec zmianie.
 
-## Oprogramowanie dla graczy, które obsługuje bot
+## Oprogramowanie, które obsługuje bot
 - Lutris
 - Wine
 - Proton
@@ -41,6 +41,15 @@ Lista systemów operacyjnych może ulec zmianie.
 - Wine Kron4ek
 
 W przyszłości dodanie zostanie wsparcie dla Luxtorpeda i innego softu.
+
+## Kernel.org
+
+Bot wspiera odpytywanie strony internetowej https://www.kernel.org/ w celu pobrania informacji o najnowszych wersjach kernela.
+
+Gałęzie:
+- mainline
+- stable
+- longterm
 
 ## Wymagane moduły
 - Discord
@@ -81,8 +90,10 @@ Komendy dotyczące serwera:
 ```
 Komendy dotyczące Linuksa:
 ;linver - informacja o aktualnie dostępnych wersjach wybranych dystrybucji Linuksa
+;kernel - informacja o aktualnie dostępnych wersjach kernela Linuksa
 ;gaming - informacja o aktualnie dostępnych wersjach oprogramowania dla graczy - Lutris, Wine, Proton, etc.
 ;pobierz - lista hiperłączy dla wybranych dystrybucji do pobrania
+;nvidia - informacja o sterownikach wideo kart graficznych NVidia
 
 ```
 
@@ -94,6 +105,7 @@ Pozostałe:
 ;windowsmeme - losuj mema o Windowsie
 ;plmeme - losuj polskiego mema
 ;meme - losuj zagranicznego mema
+;papameme - "po maturze chodziliśmy na kremówki" ;) - memy z API by Mopsior
 ;unixporn - losuj desktop
 ;wallpaper - inspiracja na tapetę
 ```
