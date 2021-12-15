@@ -17,9 +17,7 @@ class psl_Suggestions(commands.Cog):
         # suggestion command
         try:
             get_channel_id = self.client.get_channel(ctx.channel.id)
-            print(get_channel_id)
             channel = self.client.get_channel(self.suggestions_channel)
-            print(channel)
             if get_channel_id == channel:
                 await channel.purge(limit=1)
                 embed = discord.Embed(title=f'Sugestia', description=f'{arg1}', color=0x3d0557, timestamp=datetime.datetime.utcnow())
