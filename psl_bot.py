@@ -6,6 +6,7 @@ from modules.psl_GetVideo import *
 from modules.psl_GetVersion import *
 from modules.psl_Fun import *
 from modules.psl_GetKernel import *
+from commands.psl_Suggestion import psl_Suggestions
 from discord.ext import commands, tasks
 
 ##### init vars
@@ -14,6 +15,7 @@ config.read('./psl_config.ini')
 bot_name = config.get("config","bot_name")
 server_name = config.get("config","server_name")
 cfg_channel = int(config.get("config","channel_id"))
+suggestions_channel = int(config.get("config","suggestions_id"))
 godfather = config.get("config","godfather").split(",")
 head_admins = config.get("config","head_admins").split(",")
 admins = config.get("config","admins").split(",")
@@ -58,7 +60,9 @@ async def pomoc(ctx):
     field1_name = f'Komendy dotyczące serwera:'
     field1_value = (
         f'**;admin** - aktualny zespół administracji i moderatorów\n'
-        f'**;support** - lista wspierających serwer'
+        f'**;support** - lista wspierających serwer\n'
+        f'**;sugestia <tekst sugestii>** - zgłoś sugestię dot. serwera, działa tylko na kanale #propozycje_sugestie\n'
+
     )
     field2_name = f'Komendy dotyczące Linuksa:'
     field2_value = (
@@ -616,4 +620,5 @@ async def kernel_checker():
 
 ## init
 if __name__ == '__main__':
+    client.add_cog(psl_Suggestions(client, suggestions_channel, embed_color))
     client.run(token)
