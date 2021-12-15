@@ -266,21 +266,6 @@ async def admin(ctx):
     embedVar.add_field(name=field3_name, value=field3_value, inline=False)
     await channel.send(embed=embedVar)
 
-
-@client.command()
-async def support(ctx):
-    channel = client.get_channel(cfg_channel)
-    str1 = '\n'.join(supporters)
-    embed_title = f'**Wspierający serwer {server_name}**'
-    embed_description = f'Jeśli chcesz znaleźć się na tej liście koniecznie zajrzyj na kanał **#wesprzyj_nas**'
-    field1_name = f'**Oto lista wspierających serwer {server_name}:**'
-    field1_value = (
-        f'{str1}'
-    )
-    embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
-    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
-    await channel.send(embed=embedVar)
-
 @client.command()
 async def cat(ctx):
     channel = client.get_channel(cfg_channel)

@@ -1,6 +1,6 @@
 import datetime
 import discord
-from discord.ext import commands
+from discord.ext import commands, server
 
 class psl_Server(commands.Cog):
     def __init__(self, client, bot_name, channel_id, embed_color):
@@ -9,6 +9,7 @@ class psl_Server(commands.Cog):
             self.bot_name = bot_name
             self.embed_color = embed_color
             self.channel_id = channel_id
+            self.server_name = "Polska Społeczność Linuxa"
         except Exception as e:
             print(str(e))
 
@@ -53,4 +54,23 @@ class psl_Server(commands.Cog):
         embedVar.add_field(name=field2_name, value=field2_value, inline=False)
         embedVar.add_field(name=field3_name, value=field3_value, inline=False)
         embedVar.add_field(name=field4_name, value=field4_value, inline=False)
+        await channel.send(embed=embedVar)
+
+    @commands.command()
+    async def support(self, ctx):
+        channel = self.client.get_channel(self.channel_id)
+        supporters = []
+        for user in ctx.guild.members:
+            if "Wspierający" in user.roles:
+                supporters.append(user)
+                print("Znalazłem wspierającego")
+        str1 = '\n'.join(supporters)
+        embed_title = f'**Wspierający serwer {self.server_name}**'
+        embed_description = f'Jeśli chcesz znaleźć się na tej liście koniecznie zajrzyj na kanał **#wesprzyj_nas**'
+        field1_name = f'**Oto lista wspierających serwer {self.server_name}:**'
+        field1_value = (
+            f'{str1}'
+        )
+        embedVar = discord.Embed(title=embed_title, description=embed_description, color=self.embed_color)
+        embedVar.add_field(name=field1_name, value=field1_value, inline=False)
         await channel.send(embed=embedVar)
