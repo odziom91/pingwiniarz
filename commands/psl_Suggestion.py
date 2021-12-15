@@ -4,9 +4,12 @@ from discord.ext import commands, tasks
 
 class psl_Suggestions(commands.Cog):
     def __init__(self, client, suggestions_channel, embed_color):
-        self.client = client
-        self.embed_color = embed_color
-        self.suggestions_channel = suggestions_channel
+        try:
+            self.client = client
+            self.embed_color = embed_color
+            self.suggestions_channel = suggestions_channel
+        except Exception as e:
+            print(str(e))
 
     @commands.command()
     async def sugestia(self, ctx, *, arg1):
