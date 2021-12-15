@@ -60,7 +60,9 @@ async def pomoc(ctx):
     field1_name = f'Komendy dotyczące serwera:'
     field1_value = (
         f'**;admin** - aktualny zespół administracji i moderatorów\n'
-        f'**;support** - lista wspierających serwer'
+        f'**;support** - lista wspierających serwer\n'
+        f'**;sugestia <tekst sugestii>** - zgłoś sugestię dot. serwera, działa tylko na kanale #propozycje_sugestie\n'
+
     )
     field2_name = f'Komendy dotyczące Linuksa:'
     field2_value = (

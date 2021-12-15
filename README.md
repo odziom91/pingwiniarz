@@ -75,7 +75,7 @@ token = tu należy wkleić wygenerowany w środowisku deweloperskim Discorda tok
 Komendy dotyczące serwera:
 ;admin - aktualny zespół administracji i moderatorów
 ;support - lista wspierających serwer
-
+;sugestia <tekst sugestii> - zgłoś sugestię dot. serwera, działa tylko na kanale #propozycje_sugestie
 ```
 
 ```
