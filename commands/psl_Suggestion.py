@@ -1,16 +1,12 @@
 import datetime
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 
 class psl_Suggestions(commands.Cog):
     def __init__(self, client, suggestions_channel, embed_color):
-        # init
-        try:
-            self.client = client
-            self.embed_color = embed_color
-            self.suggestions_channel = suggestions_channel
-        except Exception as e:
-            print(str(e))
+        self.client = client
+        self.embed_color = embed_color
+        self.suggestions_channel = suggestions_channel
 
     @commands.command()
     async def sugestia(self, ctx, *, arg1):
