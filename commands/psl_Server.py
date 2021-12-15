@@ -1,6 +1,6 @@
 import datetime
 import discord
-from discord.ext import commands, server
+from discord.ext import commands
 
 class psl_Server(commands.Cog):
     def __init__(self, client, bot_name, channel_id, embed_color):
