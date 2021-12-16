@@ -18,9 +18,9 @@ server_name = config.get("config","server_name")
 cfg_channel = int(config.get("config","channel_id"))
 suggestions_channel = int(config.get("config","suggestions_id"))
 godfather = config.get("config","godfather").split(",")
-head_admins = config.get("config","head_admins").split(",")
-admins = config.get("config","admins").split(",")
-mods = config.get("config","mods").split(",")
+head_admins = int(config.get("config","head_admins"))
+admins = int(config.get("config","admins"))
+mods = int(config.get("config","mods"))
 supporters = config.get("config","supporters").split(",")
 token = config.get("config","token")
 embed_color = 0xeace37
@@ -28,7 +28,9 @@ embed_color = 0xeace37
 
 ##### discord part
 activity = discord.Game(name=f';pomoc | {server_name}')
-client = commands.Bot(command_prefix=";", activity=activity, status=discord.Status.idle)
+intents = discord.Intents.default()
+intents.members = True
+client = commands.Bot(command_prefix=";", activity=activity, status=discord.Status.idle, intents=intents)
 client.remove_command("help")
 
 ## events
@@ -232,33 +234,6 @@ async def pobierz(ctx):
         f'**Qubes OS** - pobierz: https://www.qubes-os.org/downloads/ \n'
         f'**NixOS** - pobierz: http://nixos.org/nixos/download.html \n'
         f'**Void Linux** - pobierz: https://voidlinux.org/download/ \n'
-    )
-    embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
-    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
-    embedVar.add_field(name=field2_name, value=field2_value, inline=False)
-    embedVar.add_field(name=field3_name, value=field3_value, inline=False)
-    await channel.send(embed=embedVar)
-
-
-@client.command()
-async def admin(ctx):
-    channel = client.get_channel(cfg_channel)
-    str1 = '\n'.join(head_admins)
-    str2 = '\n'.join(admins)
-    str3 = '\n'.join(mods)
-    embed_title = f'**Administracja serwera {server_name}**'
-    embed_description = "Poniżej znajdziesz listę administratorów i moderatorów serwera."
-    field1_name = f'**Główni administratorzy:**'
-    field1_value = (
-        f'{str1}'
-    )
-    field2_name = f'**Administratorzy:**'
-    field2_value = (
-        f'{str2}'
-    )
-    field3_name = f'**Moderatorzy:**'
-    field3_value = (
-        f'{str3}'
     )
     embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
     embedVar.add_field(name=field1_name, value=field1_value, inline=False)
@@ -559,5 +534,5 @@ async def kernel_checker():
 ## init
 if __name__ == '__main__':
     client.add_cog(psl_Suggestions(client, suggestions_channel, embed_color))
-    client.add_cog(psl_Server(client, bot_name, cfg_channel, embed_color))
+    client.add_cog(psl_Server(client, bot_name, head_admins, admins, mods, cfg_channel, embed_color))
     client.run(token)
