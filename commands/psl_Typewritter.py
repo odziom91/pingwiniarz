@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from discord.ext.commands import has_permissions
 
 class psl_Typewritter(commands.Cog):
     def __init__(self, client):
