@@ -2,7 +2,9 @@ import configparser
 import discord
 from ast import literal_eval
 from random import randint
+from commands.psl_RssParser import psl_RssParser
 from commands.psl_Server import psl_Server
+from commands.psl_Typewritter import psl_Typewritter
 from modules.psl_GetVideo import *
 from modules.psl_GetVersion import *
 from modules.psl_Fun import *
@@ -42,6 +44,7 @@ async def on_ready():
     os_version_checker.start()
     nvidia_version_checker.start()
     kernel_checker.start()
+    client.add_cog(psl_RssParser(client, cfg_channel, embed_color))
 
 @client.event
 async def on_command_error(ctx, error):
@@ -535,4 +538,6 @@ async def kernel_checker():
 if __name__ == '__main__':
     client.add_cog(psl_Suggestions(client, suggestions_channel, embed_color))
     client.add_cog(psl_Server(client, bot_name, head_admins, admins, mods, supporters, cfg_channel, embed_color))
+    client.add_cog(psl_Typewritter(client))
+    client.add_cog(psl_RssParser(client, cfg_channel, embed_color))
     client.run(token)
