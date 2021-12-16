@@ -3,7 +3,7 @@ from discord.ext import commands
 from discord.utils import get
 
 class psl_Server(commands.Cog):
-    def __init__(self, client, bot_name, ha_id, adm_id, mods_id, channel_id, embed_color):
+    def __init__(self, client, bot_name, ha_id, adm_id, mods_id, sup_id, channel_id, embed_color):
         try:
             self.client = client
             self.bot_name = bot_name
@@ -13,6 +13,7 @@ class psl_Server(commands.Cog):
             self.ha_id = ha_id
             self.adm_id = adm_id
             self.mods_id = mods_id
+            self.sup_id = sup_id
         except Exception as e:
             print(str(e))
 
@@ -64,7 +65,7 @@ class psl_Server(commands.Cog):
         try:
             supporters = []
             channel = self.client.get_channel(self.channel_id)
-            guild = get(ctx.guild.roles, id=int(891007091937017926))
+            guild = get(ctx.guild.roles, id=self.sup_id)
             SupportersList = guild.members
             for user in SupportersList:
                 supporters.append(user.name)

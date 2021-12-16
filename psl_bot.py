@@ -21,7 +21,7 @@ godfather = config.get("config","godfather").split(",")
 head_admins = int(config.get("config","head_admins"))
 admins = int(config.get("config","admins"))
 mods = int(config.get("config","mods"))
-supporters = config.get("config","supporters").split(",")
+supporters = int(config.get("config","supporters"))
 token = config.get("config","token")
 embed_color = 0xeace37
 #####
@@ -534,5 +534,5 @@ async def kernel_checker():
 ## init
 if __name__ == '__main__':
     client.add_cog(psl_Suggestions(client, suggestions_channel, embed_color))
-    client.add_cog(psl_Server(client, bot_name, head_admins, admins, mods, cfg_channel, embed_color))
+    client.add_cog(psl_Server(client, bot_name, head_admins, admins, mods, supporters, cfg_channel, embed_color))
     client.run(token)
