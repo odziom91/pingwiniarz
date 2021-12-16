@@ -3,6 +3,7 @@ import discord
 from ast import literal_eval
 from random import randint
 from commands.psl_Server import psl_Server
+from commands.psl_Typewritter import psl_Typewritter
 from modules.psl_GetVideo import *
 from modules.psl_GetVersion import *
 from modules.psl_Fun import *
@@ -535,4 +536,5 @@ async def kernel_checker():
 if __name__ == '__main__':
     client.add_cog(psl_Suggestions(client, suggestions_channel, embed_color))
     client.add_cog(psl_Server(client, bot_name, head_admins, admins, mods, supporters, cfg_channel, embed_color))
+    client.add_cog(psl_Typewritter(client))
     client.run(token)
