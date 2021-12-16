@@ -10,7 +10,7 @@ class psl_Typewritter(commands.Cog):
             print(str(e))
 
     @commands.command()
-    @commands.has_permissions(administartor=True)
+    @commands.has_permissions(administrator=True)
     async def tw(self, ctx, *, arg1):
         # typewritter command
         try:
