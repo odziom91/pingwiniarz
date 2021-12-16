@@ -2,6 +2,7 @@ import configparser
 import discord
 from ast import literal_eval
 from random import randint
+from commands.psl_Server import psl_Server
 from modules.psl_GetVideo import *
 from modules.psl_GetVersion import *
 from modules.psl_Fun import *
@@ -17,17 +18,19 @@ server_name = config.get("config","server_name")
 cfg_channel = int(config.get("config","channel_id"))
 suggestions_channel = int(config.get("config","suggestions_id"))
 godfather = config.get("config","godfather").split(",")
-head_admins = config.get("config","head_admins").split(",")
-admins = config.get("config","admins").split(",")
-mods = config.get("config","mods").split(",")
-supporters = config.get("config","supporters").split(",")
+head_admins = int(config.get("config","head_admins"))
+admins = int(config.get("config","admins"))
+mods = int(config.get("config","mods"))
+supporters = int(config.get("config","supporters"))
 token = config.get("config","token")
 embed_color = 0xeace37
 #####
 
 ##### discord part
 activity = discord.Game(name=f';pomoc | {server_name}')
-client = commands.Bot(command_prefix=";", activity=activity, status=discord.Status.idle)
+intents = discord.Intents.default()
+intents.members = True
+client = commands.Bot(command_prefix=";", activity=activity, status=discord.Status.idle, intents=intents)
 client.remove_command("help")
 
 ## events
@@ -53,54 +56,6 @@ async def on_command_error(ctx, error):
     await channel.send(embed=embedVar)
 
 ## commands
-@client.command()
-async def pomoc(ctx):
-    channel = client.get_channel(cfg_channel)
-    embed_title = f'***Pomoc dla {bot_name}***'
-    field1_name = f'Komendy dotyczące serwera:'
-    field1_value = (
-        f'**;admin** - aktualny zespół administracji i moderatorów\n'
-        f'**;support** - lista wspierających serwer\n'
-        f'**;sugestia <tekst sugestii>** - zgłoś sugestię dot. serwera, działa tylko na kanale #propozycje_sugestie\n'
-
-    )
-    field2_name = f'Komendy dotyczące Linuksa:'
-    field2_value = (
-        f'**;linver** - informacja o aktualnie dostępnych wersjach wybranych dystrybucji Linuksa\n'
-        f'**;kernel** - informacja o aktualnie dostępnych wersjach kernela Linuksa\n'
-        f'**;gaming** - informacja o aktualnie dostępnych wersjach oprogramowania dla graczy - Lutris, Wine, Proton, etc.\n'
-        f'**;pobierz** - lista hiperłączy dla wybranych dystrybucji do pobrania\n'
-        f'**;nvidia** - informacja o sterownikach wideo kart graficznych NVidia'
-    )
-    field3_name = f'Pozostałe:'
-    field3_value = (
-        f'**;cat** - losuj słodkiego kota\n'
-        f'**;dog** - losuj słodkiego psa\n'
-        f'**;linuxmeme** - losuj mema o Linuksie\n'
-        f'**;windowsmeme** - losuj mema o Windowsie\n'
-        f'**;plmeme** - losuj polskiego mema\n'
-        f'**;meme** - losuj zagranicznego mema\n'
-        f'**;papameme** - "po maturze chodziliśmy na kremówki" ;)\n'
-        f'**;unixporn** - losuj desktop\n'
-        f'**;wallpaper** - inspiracja na tapetę\n'
-    )
-    field4_value = (
-        f'Więcej komend wkrótce...\n'
-        f'W przypadku problemów z działaniem bota prosimy o kontakt z Administracją.\n'
-    )
-    field4_name = f'Ważne!'
-    field4_value = (
-        f'Więcej komend wkrótce...\n'
-        f'W przypadku problemów z działaniem bota prosimy o kontakt z Administracją.\n'
-    )
-    embedVar = discord.Embed(title=embed_title, color=0x00ff00)
-    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
-    embedVar.add_field(name=field2_name, value=field2_value, inline=False)
-    embedVar.add_field(name=field3_name, value=field3_value, inline=False)
-    embedVar.add_field(name=field4_name, value=field4_value, inline=False)
-    await channel.send(embed=embedVar)
-    
-
 @client.command()
 async def nvidia(ctx):
     config = configparser.ConfigParser()
@@ -284,48 +239,6 @@ async def pobierz(ctx):
     embedVar.add_field(name=field1_name, value=field1_value, inline=False)
     embedVar.add_field(name=field2_name, value=field2_value, inline=False)
     embedVar.add_field(name=field3_name, value=field3_value, inline=False)
-    await channel.send(embed=embedVar)
-
-
-@client.command()
-async def admin(ctx):
-    channel = client.get_channel(cfg_channel)
-    str1 = '\n'.join(head_admins)
-    str2 = '\n'.join(admins)
-    str3 = '\n'.join(mods)
-    embed_title = f'**Administracja serwera {server_name}**'
-    embed_description = "Poniżej znajdziesz listę administratorów i moderatorów serwera."
-    field1_name = f'**Główni administratorzy:**'
-    field1_value = (
-        f'{str1}'
-    )
-    field2_name = f'**Administratorzy:**'
-    field2_value = (
-        f'{str2}'
-    )
-    field3_name = f'**Moderatorzy:**'
-    field3_value = (
-        f'{str3}'
-    )
-    embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
-    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
-    embedVar.add_field(name=field2_name, value=field2_value, inline=False)
-    embedVar.add_field(name=field3_name, value=field3_value, inline=False)
-    await channel.send(embed=embedVar)
-
-
-@client.command()
-async def support(ctx):
-    channel = client.get_channel(cfg_channel)
-    str1 = '\n'.join(supporters)
-    embed_title = f'**Wspierający serwer {server_name}**'
-    embed_description = f'Jeśli chcesz znaleźć się na tej liście koniecznie zajrzyj na kanał **#wesprzyj_nas**'
-    field1_name = f'**Oto lista wspierających serwer {server_name}:**'
-    field1_value = (
-        f'{str1}'
-    )
-    embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
-    embedVar.add_field(name=field1_name, value=field1_value, inline=False)
     await channel.send(embed=embedVar)
 
 @client.command()
@@ -621,4 +534,5 @@ async def kernel_checker():
 ## init
 if __name__ == '__main__':
     client.add_cog(psl_Suggestions(client, suggestions_channel, embed_color))
+    client.add_cog(psl_Server(client, bot_name, head_admins, admins, mods, supporters, cfg_channel, embed_color))
     client.run(token)
