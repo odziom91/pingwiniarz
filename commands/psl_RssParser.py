@@ -13,7 +13,7 @@ class psl_RssParser(commands.Cog):
         except Exception as e:
             print(str(e))
 
-    @tasks.loop(seconds=3600)
+    @tasks.loop(seconds=600)
     async def RssParser(self):
         try:
             feeds = [
