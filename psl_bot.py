@@ -341,11 +341,11 @@ async def kernel(ctx):
     str2 = '\n'.join(kernel_stable)
     str3 = '\n'.join(kernel_longterm)
     embed_title = f'**kernel.org - najnowsze wersje kernela**'
-    field1_name = f'**Gałąż mainline:**'
+    field1_name = f'**Gałąź mainline:**'
     field1_value = (
         f'{str1}'
     )
-    field2_name = f'**Gałąż stable:**'
+    field2_name = f'**Gałąź stable:**'
     field2_value = (
         f'{str2}'
     )
@@ -513,19 +513,19 @@ async def kernel_checker():
     kernel_longterm = literal_eval(cfg_kernel_longterm)
     chk_kernel_mainline, chk_kernel_stable, chk_kernel_longterm = GetKernel()
     if chk_kernel_mainline != kernel_mainline:
-        embed_title = f'**Hej,** Kernel - **gałąż mainline** - został wydany!\n'
+        embed_title = f'**Hej,** Kernel - **gałąź mainline** - został wydany!\n'
         embed_description = f'Aktualna wersja to: **{chk_kernel_mainline[0]}**\n'
         embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
         await channel.send(embed=embedVar)
         config.set("kernel", "mainline", str(chk_kernel_mainline))
     if chk_kernel_stable != kernel_stable:
-        embed_title = f'**Hej,** Kernel - **gałąż stable** - został wydany!\n'
+        embed_title = f'**Hej,** Kernel - **gałąź stable** - został wydany!\n'
         embed_description = f'Aktualna wersja to: **{chk_kernel_stable[0]}**\n'
         embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
         await channel.send(embed=embedVar)
         config.set("kernel", "stable", str(chk_kernel_stable))
     if chk_kernel_longterm != kernel_longterm:
-        embed_title = f'**Hej,** Kernel - **gałąż longterm** - został wydany!\n'
+        embed_title = f'**Hej,** Kernel - **gałąź longterm** - został wydany!\n'
         embed_description = f'Aktualna wersja to: **{chk_kernel_longterm[0]}**\n'
         embedVar = discord.Embed(title=embed_title, description=embed_description, color=embed_color)
         await channel.send(embed=embedVar)
