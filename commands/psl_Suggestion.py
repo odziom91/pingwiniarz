@@ -1,6 +1,7 @@
 import datetime
 import discord
-from discord.ext import commands, tasks
+from discord.ext import commands
+from commands.psl_Exceptions import psl_Exception
 
 class psl_Suggestions(commands.Cog):
     def __init__(self, client, suggestions_channel, embed_color):
@@ -33,4 +34,4 @@ class psl_Suggestions(commands.Cog):
                 embed = discord.Embed(title=f'Sugestia', description=f'Komendę należy użyć na kanale #propozycje_sugestie', color=0x3d0557, timestamp=datetime.datetime.utcnow())
                 sugestia = await get_channel_id.send(embed=embed)
         except Exception as e:
-            print(str(e))
+            await psl_Exception(self.client, self.suggestions_channel, str(e))

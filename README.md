@@ -71,11 +71,14 @@ Poniżej opisane są poszczególne opcje:
 bot_name = tu wpisz nazwę bota, będzie ona się pojawiać w sekcji ;pomoc
 server_name = tu wpisz nazwę serwera, na którym postawiony jest bot
 channel_id = wprowadź ID kanału tekstowego, na którym będą pojawiać się treści z bota
-godfather = tu wpisz dane o założycielu serwera - może to być nick. Można wpisać kilku rozdzielając przecinkiem
-head_admins = tu wpisz nicki głównych administratorów - każdy oddzielony przecinkiem
-admins = tu wpisz nicki administratorów - każdy oddzielony przecinkiem
-mods = tu wpisz nicki moderatorów - każdy oddzielony przecinkiem
-supporters = tu wpisz nicki osób wspierających - każdy oddzielony przecinkiem
+suggestions_id = wprowadź ID kanału tekstowego z sugestiami
+rss_id = wprowadź ID kanału tekstowego dla parsera RSS (wspierane: Łowcy Gier)
+error_id = wprowadź ID kanału tekstowego, na którym będą wypisywane błędy bota
+godfather = tu wpisz dane o założycielu serwera - może to być nick.
+head_admins = tu wpisz id grupy głównych administratorów
+admins = tu wpisz id grupy administratorów
+mods = tu wpisz id grupy moderatorów
+supporters = tu wpisz id grupy wspierających
 token = tu należy wkleić wygenerowany w środowisku deweloperskim Discorda token
 ```
 
@@ -85,6 +88,7 @@ Komendy dotyczące serwera:
 ;admin - aktualny zespół administracji i moderatorów
 ;support - lista wspierających serwer
 ;sugestia <tekst sugestii> - zgłoś sugestię dot. serwera, działa tylko na kanale #propozycje_sugestie
+;userinfo [użytkownik] - sprawdź informacje o sobie (bez parametru) lub użytkowniku (z parametrem)
 ```
 
 ```
@@ -108,4 +112,9 @@ Pozostałe:
 ;papameme - "po maturze chodziliśmy na kremówki" ;) - memy z API by Mopsior
 ;unixporn - losuj desktop
 ;wallpaper - inspiracja na tapetę
+```
+
+```
+Dla administratorów:
+;tw tekst - zamienia tekst na ikony z literami
 ```
